@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.hrconnect.storybook.R
 import com.hrconnect.uikit.presentation.components.avatar.Avatar
@@ -129,21 +130,21 @@ fun StorybookScreen() {
                 HrCheckbox(
                     checked = true,
                     onCheckedChange = {},
-                    label = "Checked"
+                    label = AnnotatedString("Checked")
                 )
             }
             item {
                 HrCheckbox(
                     checked = false,
                     onCheckedChange = {},
-                    label = "Unchecked"
+                    label = AnnotatedString("Unchecked")
                 )
             }
             item {
                 HrCheckbox(
                     checked = false,
                     onCheckedChange = {},
-                    label = "Disabled",
+                    label = AnnotatedString("Disabled"),
                     enabled = false
                 )
             }

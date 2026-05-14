@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hrconnect.uikit.R
@@ -27,7 +28,7 @@ fun HrCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    label: String? = null,
+    label: AnnotatedString? = null,
     enabled: Boolean = true,
 ) {
     Row(
@@ -93,7 +94,7 @@ private fun HrCheckboxPreview() {
         HrCheckbox(
             checked = true,
             onCheckedChange = {},
-            label = "Checked"
+            label = AnnotatedString("Checked")
         )
     }
 }
