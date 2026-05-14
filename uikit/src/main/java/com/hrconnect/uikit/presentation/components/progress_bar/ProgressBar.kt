@@ -31,7 +31,7 @@ fun ProgressBar(
                         color = when {
                             index < currentPage -> HrTheme.colorScheme.primary
                             index == currentPage -> HrTheme.colorScheme.primary.copy(alpha = 0.5f)
-                            else -> HrTheme.colorScheme.progressBarContainer
+                            else -> HrTheme.colorScheme.progressTrack
                         },
                         shape = CircleShape
                     )

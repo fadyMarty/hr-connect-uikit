@@ -22,13 +22,14 @@ data class HrColorScheme(
     val inputContainerDisabled: Color,
     val checkboxContainerDisabled: Color,
     val border: Color,
+    val containerBorder: Color,
     val bottomBarBorder: Color,
     val bottomBarContent: Color,
     val fieldLabel: Color,
     val placeholder: Color,
     val description: Color,
     val divider: Color,
-    val progressBarContainer: Color,
+    val progressTrack: Color,
 )
 
 val LightColorScheme = HrColorScheme(
@@ -48,13 +49,14 @@ val LightColorScheme = HrColorScheme(
     inputContainerDisabled = Color(0xFFF3F3FE),
     checkboxContainerDisabled = Color(0xFFEDEDF9),
     border = Color(0xFFC3C6D7),
+    containerBorder = Color(0xFFEDEDF9),
     bottomBarBorder = Color(0xFFF1F5F9),
     bottomBarContent = Color(0xFF94A3B8),
     fieldLabel = Color(0xFF434655),
     placeholder = Color(0xFF6B7280),
     description = Color(0xFF737686),
     divider = Color(0xFFF8FAFC),
-    progressBarContainer = Color(0xFFE1E2ED)
+    progressTrack = Color(0xFFE1E2ED)
 )
 
 val LocalHrColorScheme = staticCompositionLocalOf {
