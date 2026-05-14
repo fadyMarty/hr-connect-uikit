@@ -9,11 +9,15 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.hrconnect.storybook.R
 import com.hrconnect.uikit.presentation.components.avatar.Avatar
+import com.hrconnect.uikit.presentation.components.bottom_bar.BottomBar
+import com.hrconnect.uikit.presentation.components.bottom_bar.BottomBarItem
 import com.hrconnect.uikit.presentation.components.buttons.DestructiveButton
 import com.hrconnect.uikit.presentation.components.buttons.PrimaryButton
 import com.hrconnect.uikit.presentation.components.buttons.SecondaryButton
@@ -21,6 +25,7 @@ import com.hrconnect.uikit.presentation.components.cards.ListCard
 import com.hrconnect.uikit.presentation.components.checkbox.HrCheckbox
 import com.hrconnect.uikit.presentation.components.inputs.Input
 import com.hrconnect.uikit.presentation.components.inputs.PasswordInput
+import com.hrconnect.uikit.presentation.components.progress_bar.ProgressBar
 import com.hrconnect.uikit.presentation.components.select.Select
 
 @Composable
@@ -149,17 +154,6 @@ fun StorybookScreen() {
                 )
             }
             item {
-                Avatar(
-                    displayText = "JD",
-                    image = painterResource(R.drawable.img_candidate_avatar)
-                )
-            }
-            item {
-                Avatar(
-                    displayText = "JD"
-                )
-            }
-            item {
                 ListCard(
                     title = "Senior Product Designer",
                     company = "Product Team",
@@ -171,6 +165,85 @@ fun StorybookScreen() {
                     onClick = {}
                 )
             }
+            item {
+                Avatar(
+                    displayText = "JD",
+                    image = painterResource(R.drawable.img_candidate_avatar)
+                )
+            }
+            item {
+                Avatar(
+                    displayText = "JD"
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(Route.HrBoard),
+                    onItemClick = {}
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(Route.CandidateList),
+                    onItemClick = {}
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(Route.VacancyList),
+                    onItemClick = {}
+                )
+            }
+            item {
+                ProgressBar(
+                    currentPage = 0,
+                    pageCount = 3
+                )
+            }
+            item {
+                ProgressBar(
+                    currentPage = 1,
+                    pageCount = 3
+                )
+            }
+            item {
+                ProgressBar(
+                    currentPage = 2,
+                    pageCount = 3
+                )
+            }
         }
     }
+}
+
+private sealed interface Route {
+    data object HrBoard : Route
+    data object CandidateList : Route
+    data object VacancyList : Route
+}
+
+@Composable
+private fun getBottomBarItems(
+    selectedRoute: Route,
+): List<BottomBarItem<Route>> {
+    return listOf(
+        BottomBarItem(
+            selected = selectedRoute == Route.HrBoard,
+            icon = ImageVector.vectorResource(R.drawable.ic_dashboard),
+            label = "Board",
+            route = Route.HrBoard
+        ),
+        BottomBarItem(
+            selected = selectedRoute == Route.CandidateList,
+            icon = ImageVector.vectorResource(R.drawable.ic_groups),
+            label = "Candidates",
+            route = Route.CandidateList
+        ),
+        BottomBarItem(
+            selected = selectedRoute == Route.VacancyList,
+            icon = ImageVector.vectorResource(R.drawable.ic_work),
+            label = "Vacancies",
+            route = Route.VacancyList
+        )
+    )
 }

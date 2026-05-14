@@ -53,7 +53,7 @@ fun InputLayout(
             color = when {
                 isError -> HrTheme.colorScheme.error
                 focused || isFocused -> HrTheme.colorScheme.primary
-                else -> HrTheme.colorScheme.stroke
+                else -> HrTheme.colorScheme.border
             },
             shape = RoundedCornerShape(8.dp)
         )

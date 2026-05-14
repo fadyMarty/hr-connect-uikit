@@ -35,7 +35,7 @@ fun Avatar(
                 width = 2.dp,
                 color = if (image != null) {
                     HrTheme.colorScheme.primaryVariant
-                } else HrTheme.colorScheme.stroke,
+                } else HrTheme.colorScheme.border,
                 shape = CircleShape
             )
             .clickable(

@@ -63,7 +63,7 @@ fun Select(
                 .clip(RoundedCornerShape(8.dp))
                 .border(
                     width = 1.dp,
-                    color = HrTheme.colorScheme.stroke,
+                    color = HrTheme.colorScheme.border,
                     shape = RoundedCornerShape(8.dp)
                 )
                 .background(HrTheme.colorScheme.background)

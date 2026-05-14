@@ -55,7 +55,7 @@ fun HrCheckbox(
                             color = if (enabled) {
                                 HrTheme.colorScheme.description
                             } else {
-                                HrTheme.colorScheme.stroke
+                                HrTheme.colorScheme.border
                             },
                             shape = RoundedCornerShape(4.dp)
                         )
