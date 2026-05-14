@@ -38,7 +38,7 @@ fun HrCheckbox(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .size(24.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .background(
