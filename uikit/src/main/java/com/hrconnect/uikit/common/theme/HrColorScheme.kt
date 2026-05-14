@@ -30,6 +30,7 @@ data class HrColorScheme(
     val description: Color,
     val divider: Color,
     val indicatorTrack: Color,
+    val topBarTitle: Color,
 )
 
 val LightColorScheme = HrColorScheme(
@@ -56,7 +57,8 @@ val LightColorScheme = HrColorScheme(
     placeholder = Color(0xFF6B7280),
     description = Color(0xFF737686),
     divider = Color(0xFFF8FAFC),
-    indicatorTrack = Color(0xFFE1E2ED)
+    indicatorTrack = Color(0xFFE1E2ED),
+    topBarTitle = Color(0xFF0F172A)
 )
 
 val LocalHrColorScheme = staticCompositionLocalOf {
