@@ -29,6 +29,7 @@ import com.hrconnect.uikit.common.theme.Manrope
 fun Input(
     state: TextFieldState,
     modifier: Modifier = Modifier,
+    inputModifier: Modifier = Modifier,
     label: String? = null,
     supportingText: String? = null,
     placeholder: String? = null,
@@ -48,7 +49,7 @@ fun Input(
         focused = focused
     ) { styleModifier, interactionSource ->
         BasicTextField(
-            modifier = styleModifier,
+            modifier = styleModifier.then(inputModifier),
             state = state,
             interactionSource = interactionSource,
             enabled = enabled,
