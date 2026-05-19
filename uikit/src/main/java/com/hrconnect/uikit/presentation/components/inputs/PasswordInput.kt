@@ -35,6 +35,7 @@ fun PasswordInput(
     isPasswordVisible: Boolean,
     onTogglePasswordVisibility: () -> Unit,
     modifier: Modifier = Modifier,
+    inputModifier: Modifier = Modifier,
     label: String? = null,
     supportingText: String? = null,
     placeholder: String? = null,
@@ -52,7 +53,7 @@ fun PasswordInput(
         focused = focused
     ) { styleModifier, interactionSource ->
         BasicSecureTextField(
-            modifier = styleModifier,
+            modifier = styleModifier.then(inputModifier),
             state = state,
             textObfuscationMode = if (isPasswordVisible) {
                 TextObfuscationMode.Visible
