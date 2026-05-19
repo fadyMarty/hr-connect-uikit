@@ -28,6 +28,7 @@ fun HrCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    checkboxModifier: Modifier = Modifier,
     label: AnnotatedString? = null,
     enabled: Boolean = true,
 ) {
@@ -38,7 +39,7 @@ fun HrCheckbox(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Box(
-            modifier = Modifier
+            modifier = checkboxModifier
                 .size(24.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .background(
