@@ -1,5 +1,6 @@
 package com.hrconnect.uikit.presentation.components.avatar
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,6 +21,23 @@ import androidx.compose.ui.unit.dp
 import com.hrconnect.uikit.common.theme.HrTheme
 import com.hrconnect.uikit.common.theme.Manrope
 
+/**
+ * Компонент аватара (круглая иконка пользователя).
+ *
+ * Ответственность:
+ * - Отображение текстовой инициалы (displayText) по умолчанию.
+ * - Отображение изображения (image), если передано, поверх текста.
+ * - Визуальная индикация: рамка primaryVariant при наличии изображения, иначе border.
+ * - Обработка клика с логированием (только если передан onClick).
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @param displayText текст (обычно инициалы), отображаемый, когда нет изображения
+ * @param modifier внешний модификатор (размер по умолчанию 60.dp)
+ * @param image опциональное изображение (Painter) – если передано, отображается поверх текста
+ * @param onClick опциональный колбэк клика (если null, аватар не кликабелен)
+ */
 @Composable
 fun Avatar(
     displayText: String,
@@ -27,6 +45,17 @@ fun Avatar(
     image: Painter? = null,
     onClick: (() -> Unit)? = null,
 ) {
+    // Логирование клика по аватару (INFO) — критическое пользовательское действие
+    val handleClick = {
+        if (onClick != null) {
+            Log.i(
+                "Avatar",
+                "Пользователь нажал на аватар — displayText=\"$displayText\", hasImage=${image != null}"
+            )
+            onClick()
+        }
+    }
+
     Box(
         modifier = modifier
             .size(60.dp)
@@ -35,15 +64,18 @@ fun Avatar(
                 width = 2.dp,
                 color = if (image != null) {
                     HrTheme.colorScheme.primaryVariant
-                } else HrTheme.colorScheme.border,
+                } else {
+                    HrTheme.colorScheme.border
+                },
                 shape = CircleShape
             )
             .clickable(
                 enabled = onClick != null,
-                onClick = { onClick?.invoke() }
+                onClick = handleClick
             ),
         contentAlignment = Alignment.Center
     ) {
+        // Инициалы (отображаются под изображением, если изображение есть)
         Text(
             text = displayText,
             style = TextStyle(
@@ -52,6 +84,7 @@ fun Avatar(
                 color = HrTheme.colorScheme.onBackgroundVariant
             )
         )
+        // Изображение поверх текста (если передано)
         if (image != null) {
             Image(
                 modifier = Modifier.fillMaxSize(),

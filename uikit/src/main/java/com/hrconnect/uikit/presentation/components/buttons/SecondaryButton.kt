@@ -1,5 +1,6 @@
 package com.hrconnect.uikit.presentation.components.buttons
 
+import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,12 +21,32 @@ import androidx.compose.ui.unit.sp
 import com.hrconnect.uikit.common.theme.HrTheme
 import com.hrconnect.uikit.common.theme.Manrope
 
+/**
+ * Вторичная кнопка (контурная) с рамкой primary цвета.
+ *
+ * Ответственность:
+ * - Отображение кнопки с прозрачным фоном, цветной рамкой и текстом primary.
+ * - Обработка клика с логированием.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @param label текст на кнопке
+ * @param onClick колбэк при нажатии
+ * @param modifier внешний модификатор
+ */
 @Composable
 fun SecondaryButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Логирование клика (INFO) — критическое пользовательское действие
+    val handleClick = {
+        Log.i("SecondaryButton", "Пользователь нажал на вторичную кнопку — label=\"$label\"")
+        onClick()
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -35,7 +56,7 @@ fun SecondaryButton(
                 color = HrTheme.colorScheme.primary,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable(onClick = onClick)
+            .clickable(onClick = handleClick)
             .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {

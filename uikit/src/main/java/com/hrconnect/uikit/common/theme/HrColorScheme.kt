@@ -4,6 +4,42 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Цветовая схема приложения (набор цветовых токенов).
+ *
+ * Ответственность:
+ * - Хранение всех цветовых констант, используемых в UI.
+ * - Не содержит логики, только данные.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @property primary основной цвет бренда
+ * @property primaryVariant вариант основного цвета
+ * @property primaryContainer контейнер для primary
+ * @property onPrimaryContainer цвет текста/иконок на primaryContainer
+ * @property onPrimary цвет текста/иконок на primary
+ * @property secondary второстепенный цвет
+ * @property tertiary третичный цвет
+ * @property error цвет ошибки
+ * @property onError цвет текста/иконок на ошибке
+ * @property background цвет фона экранов
+ * @property onBackground цвет текста/иконок на фоне
+ * @property onBackgroundVariant вариант цвета текста на фоне
+ * @property container цвет карточек/контейнеров
+ * @property inputContainerDisabled цвет фона отключённого поля ввода
+ * @property checkboxContainerDisabled цвет фона отключённого чекбокса
+ * @property border цвет границ
+ * @property containerBorder цвет границ контейнеров
+ * @property bottomBarBorder цвет границы нижней панели
+ * @property bottomBarContent цвет содержимого нижней панели (неактивное)
+ * @property fieldLabel цвет лейбла поля
+ * @property placeholder цвет плейсхолдера
+ * @property description цвет вспомогательного текста
+ * @property divider цвет разделителя
+ * @property indicatorTrack цвет трека индикатора (неактивный)
+ * @property topBarTitle цвет заголовка верхней панели
+ */
 @Immutable
 data class HrColorScheme(
     val primary: Color,
@@ -31,8 +67,17 @@ data class HrColorScheme(
     val divider: Color,
     val indicatorTrack: Color,
     val topBarTitle: Color,
+    val success: Color,
+    val warning: Color,
+    val neutral: Color,
 )
 
+/**
+ * Светлая тема цветовой схемы.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ */
 val LightColorScheme = HrColorScheme(
     primary = Color(0xFF004AC6),
     primaryVariant = Color(0xFF2563EB),
@@ -58,9 +103,18 @@ val LightColorScheme = HrColorScheme(
     description = Color(0xFF737686),
     divider = Color(0xFFF8FAFC),
     indicatorTrack = Color(0xFFE1E2ED),
-    topBarTitle = Color(0xFF0F172A)
+    topBarTitle = Color(0xFF0F172A),
+    success = Color(0xFF10B981),  // зелёный
+    warning = Color(0xFFF59E0B),  // оранжевый/жёлтый
+    neutral = Color(0xFF64748B)   // серый
 )
 
+/**
+ * CompositionLocal для доступа к цветовой схеме без явной передачи.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ */
 val LocalHrColorScheme = staticCompositionLocalOf {
     LightColorScheme
 }

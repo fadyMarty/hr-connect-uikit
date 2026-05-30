@@ -1,5 +1,6 @@
 package com.hrconnect.uikit.presentation.components.bottom_bar
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,12 +29,28 @@ import androidx.compose.ui.unit.sp
 import com.hrconnect.uikit.common.theme.HrTheme
 import com.hrconnect.uikit.common.theme.Manrope
 
+/**
+ * Компонент нижней навигационной панели.
+ *
+ * Ответственность:
+ * - Отображение списка пунктов меню с иконками и текстом.
+ * - Визуальная индикация выбранного пункта (цвет primaryVariant / bottomBarContent).
+ * - Обработка кликов с логированием.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @param items список пунктов меню (каждый содержит иконку, лейбл, флаг выбора)
+ * @param onItemClick колбэк при клике на пункт (передаёт выбранный BottomBarItem)
+ * @param modifier внешний модификатор
+ */
 @Composable
 fun <T> BottomBar(
     items: List<BottomBarItem<T>>,
     onItemClick: (BottomBarItem<T>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Скругление только верхних углов
     val bottomBarShape = RoundedCornerShape(
         topStart = 8.dp,
         topEnd = 8.dp
@@ -46,7 +63,7 @@ fun <T> BottomBar(
             .dropShadow(
                 shape = bottomBarShape,
                 shadow = Shadow(
-                    offset = DpOffset(0.dp, (-4).dp),
+                    offset = DpOffset(0.dp, (-4).dp), // тень направлена вверх
                     radius = 12.dp,
                     alpha = 0.05f
                 )
@@ -60,6 +77,7 @@ fun <T> BottomBar(
             )
     ) {
         items.forEach { item ->
+            // Определяем цвет содержимого в зависимости от выбранного состояния
             val contentColor = if (item.selected) {
                 HrTheme.colorScheme.primaryVariant
             } else {
@@ -74,6 +92,11 @@ fun <T> BottomBar(
                         interactionSource = null,
                         indication = ripple(bounded = false)
                     ) {
+                        // Логирование клика (INFO) — критическое пользовательское действие
+                        Log.i(
+                            "BottomBar",
+                            "Пользователь нажал на пункт меню — label=\"${item.label}\", selected=${item.selected}"
+                        )
                         onItemClick(item)
                     },
                 horizontalAlignment = Alignment.CenterHorizontally,

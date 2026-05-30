@@ -1,5 +1,6 @@
 package com.hrconnect.uikit.presentation.components.buttons
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,18 +21,39 @@ import androidx.compose.ui.unit.sp
 import com.hrconnect.uikit.common.theme.HrTheme
 import com.hrconnect.uikit.common.theme.Manrope
 
+/**
+ * Деструктивная кнопка (например, "Удалить", "Выйти").
+ *
+ * Ответственность:
+ * - Отображение кнопки с красным фоном (цвет error) и белым текстом.
+ * - Обработка клика с логированием критического действия.
+ * - Полная ширина с закруглёнными углами.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @param label текст на кнопке
+ * @param onClick колбэк при нажатии
+ * @param modifier внешний модификатор
+ */
 @Composable
 fun DestructiveButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Логирование клика по деструктивной кнопке (INFO) — критическое пользовательское действие
+    val handleClick = {
+        Log.i("DestructiveButton", "Пользователь нажал на деструктивную кнопку — label=\"$label\"")
+        onClick()
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(HrTheme.colorScheme.error)
-            .clickable(onClick = onClick)
+            .clickable(onClick = handleClick)
             .padding(vertical = 14.dp),
         contentAlignment = Alignment.Center
     ) {

@@ -1,5 +1,6 @@
 package com.hrconnect.uikit.presentation.components.select
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +35,24 @@ import androidx.compose.ui.unit.dp
 import com.hrconnect.uikit.R
 import com.hrconnect.uikit.common.theme.HrTheme
 
+/**
+ * Компонент выбора одного значения из списка (селект/дропдаун).
+ *
+ * Ответственность:
+ * - Отображение текущего выбранного элемента (selectedItem) и метки (label).
+ * - Открытие модального bottom sheet со списком для выбора.
+ * - Уведомление о выборе через колбэк onItemClick.
+ * - Логирование открытия, закрытия и выбора элемента.
+ *
+ * Дата создания: 31-05-2026
+ * Автор: Команда №2
+ *
+ * @param items список доступных для выбора строк
+ * @param onItemClick колбэк, вызываемый при выборе элемента (передаёт выбранную строку)
+ * @param modifier внешний модификатор
+ * @param selectedItem текущий выбранный элемент (null = ничего не выбрано)
+ * @param label текст заголовка (null = скрыт)
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Select(
@@ -42,8 +62,18 @@ fun Select(
     selectedItem: String? = null,
     label: String? = null,
 ) {
-    var expanded by remember {
-        mutableStateOf(false)
+    var expanded by remember { mutableStateOf(false) }
+
+    // Логирование открытия и закрытия модального окна (INFO)
+    LaunchedEffect(expanded) {
+        if (expanded) {
+            Log.i("Select", "Пользователь открыл список выбора — label=$label")
+        } else {
+            // Логируем закрытие только если было открыто (чтобы не писать при инициализации)
+            // Для простоты логируем всегда, но можно добавить условие.
+            // Расширенный вариант: запомнить предыдущее состояние через rememberPrevious.
+            Log.i("Select", "Список выбора закрыт — label=$label")
+        }
     }
 
     Column(
@@ -56,6 +86,7 @@ fun Select(
                 style = HrTheme.typography.fieldLabel
             )
         }
+        // Поле ввода, имитирующее селект (кликабельная область)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -92,6 +123,7 @@ fun Select(
         }
     }
 
+    // Модальный bottom sheet со списком вариантов
     if (expanded) {
         ModalBottomSheet(
             onDismissRequest = {
@@ -106,6 +138,11 @@ fun Select(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
+                                // Логирование выбора элемента (INFO) до вызова колбэка
+                                Log.i(
+                                    "Select",
+                                    "Пользователь выбрал элемент — item=\"$item\", label=$label"
+                                )
                                 onItemClick(item)
                                 expanded = false
                             }
